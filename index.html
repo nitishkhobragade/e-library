@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi-Course Study Portal</title>
+  <link rel="icon" type="image/x-icon" href="../logo-n.png">
+  <link rel="icon" type="image/x-icon" href="https://nitishkhobragade.github.io/portfolio.nitish//img/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Header -->
+    <header class="bg-blue-800 bg-opacity-90 text-white px-6 py-5 flex justify-between items-center shadow-md">
+        <h1 class="text-xl sm:text-2xl font-bold">📘 E-Library by Nitish</h1>
+        <nav>
+            <a href="https://wa.me/918982324497?text=Hello%20Admin%20Nitish%20Sir%2C%20I%20have%20contacted%20you%20from%20RGPV%20E%20Library%20Website%20Online" class="hover:underline text-sm sm:text-base">Contact</a>
+        </nav>
+    </header>
+
+      <!-- Superdiv (Locked Section) -->
+        <!-- Locked Div -->
+
+    <div id="superDiv" class="flex flex-col items-center justify-center h-[60vh] bg-white p-8 text-center shadow-md">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">🔐 Locked Area</h2>
+        <p class="mb-4 text-sm text-gray-600">Enter the password to access course content</p>
+        <p class="mb-4 text-sm text-red-600">Contact Your Teacher or Admin for PassWord</p>
+        <input type="password" id="passwordInput" placeholder="Enter password" 
+            class="border border-gray-300 p-2 rounded mb-2 w-64 text-center"/>
+        <button id="togglePassword" class="text-sm text-blue-600 mb-4 hover:underline">Show Password</button>
+        <button id="checkBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        Unlock Content
+        </button>
+    </div>
+
+    <!-- UnlockedDiv (Course Content Section) -->
+    <div id="unlockedDiv" class="hidden p-6 bg-gray-50">
+        <!-- background image div  -->
+        <div class="h-screen w-full bg-cover bg-center" style="background-image: url('/img/book2.jpg');">
+            
+            <!-- Course Selection Buttons -->
+                <div class="flex justify-center flex-wrap gap-4 p-4 bg-white shadow">
+                    <button class="course-btn px-4 py-2 bg-blue-500 text-white rounded shadow" data-course="btech">B.Tech</button>
+                    <button class="course-btn px-4 py-2 bg-gray-300 text-black rounded shadow" data-course="polytechnic">Polytechnic</button>
+                    <button class="course-btn px-4 py-2 bg-gray-300 text-black rounded shadow" data-course="mba">MBA</button>
+                    <button class="course-btn px-4 py-2 bg-gray-300 text-black rounded shadow" data-course="mtech">M.Tech</button>
+                </div>
+
+            <main class="p-4 max-w-4xl mx-auto">
+                <!-- Filters (Highlighted Style) -->
+                <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                    <select id="semesterSelect" class="p-3 rounded border-2 border-blue-600 bg-blue-50 font-semibold text-blue-900 w-full sm:w-1/2 shadow">
+                    <option value="">Select Semester</option>
+                    </select>
+                    <select id="branchSelect" class="p-3 rounded border-2 border-green-600 bg-green-50 font-semibold text-green-900 w-full sm:w-1/2 shadow" disabled>
+                    <option value="">Select Branch</option>
+                    </select>
+                </div>
+
+                <!-- Hyperlink Output -->
+                <div id="linkContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+            </main>
+
+        </div>
+    </div>
+
+    
+
+  <!-- Footer -->
+    <footer class="bg-blue-900 bg-opacity-90 text-white text-center py-5 mt-10">
+        <div class="space-y-2 text-sm">
+        <p>
+            This website is created by 
+            <a href="https://in.linkedin.com/in/nitishkhobragade" class="underline text-yellow-300">
+                Nitish Khobragade
+              </a>
+        </p>
+        
+        <!-- Contact Icons -->
+        <div class="flex justify-center gap-6 mt-2">
+            <!-- Gmail -->
+            <a href="mailto:nitishkhobragade89@gmail.com" title="Email">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Gmail Icon" class="w-6 h-6 hover:scale-110 transition-transform">
+              </a>
+    
+            <!-- WhatsApp -->
+            <a href="https://wa.me/918982324497?text=Hello%20Admin%20Nitish%20Sir%2C%20I%20have%20contacted%20you%20from%20RGPV%20E%20Library%20Website%20Online" title="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon" class="w-6 h-6 hover:scale-110 transition-transform">
+              </a>
+        </div>
+        </div>
+    </footer>
+  
+    <!-- script started -->
+    <script type="module">
+        import { courseData } from './courseData.js';
+        import { wordOne } from './one.js';
+        import { wordTwo } from './two.js';
+      
+        const semesterSelect = document.getElementById("semesterSelect");
+        const branchSelect = document.getElementById("branchSelect");
+        const linkContainer = document.getElementById("linkContainer");
+        const courseButtons = document.querySelectorAll(".course-btn");
+      
+        let currentCourse = "btech";
+        loadCourse(currentCourse);
+      
+        courseButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            courseButtons.forEach(b => b.classList.remove("bg-blue-500", "text-white"));
+            btn.classList.add("bg-blue-500", "text-white");
+            currentCourse = btn.dataset.course;
+            loadCourse(currentCourse);
+          });
+        });
+      
+        function loadCourse(course) {
+          const courseInfo = courseData[course];
+          semesterSelect.innerHTML = `<option value="">Select Semester</option>`;
+          branchSelect.innerHTML = `<option value="">Select Branch</option>`;
+          branchSelect.disabled = true;
+          linkContainer.innerHTML = "";
+      
+          for (let i = 1; i <= courseInfo.semesters; i++) {
+            const opt = document.createElement("option");
+            opt.value = i;
+            opt.textContent = `Semester ${i}`;
+            semesterSelect.appendChild(opt);
+          }
+      
+          semesterSelect.onchange = () => {
+            const selectedSem = semesterSelect.value;
+            const courseInfo = courseData[currentCourse];
+            linkContainer.innerHTML = "";
+      
+            if (!selectedSem) {
+              branchSelect.disabled = true;
+              branchSelect.innerHTML = `<option value="">Select Branch</option>`;
+              return;
+            }
+      
+            if (courseInfo.common.includes(parseInt(selectedSem))) {
+              branchSelect.disabled = true;
+              branchSelect.innerHTML = `<option value="">Select Branch</option>`;
+              const links = courseInfo.data[selectedSem]?.common || [];
+              displayLinks(links);
+            } else {
+              branchSelect.disabled = false;
+              branchSelect.innerHTML = `<option value="">Select Branch</option>`;
+              courseInfo.branches.forEach(branch => {
+                const opt = document.createElement("option");
+                opt.value = branch;
+                opt.textContent = branch;
+                branchSelect.appendChild(opt);
+              });
+      
+              branchSelect.onchange = () => {
+                const selectedBranch = branchSelect.value;
+                const links = courseInfo.data[selectedSem]?.[selectedBranch] || [];
+                displayLinks(links);
+              };
+            }
+          };
+        }
+      
+        function displayLinks(links) {
+          linkContainer.innerHTML = "";
+          if (!links) return;
+          const linkTitles = {
+            syllabus: "Syllabus",
+            books: "Study Books",
+            notes: "Handwritten Notes",
+            questions: "Important Questions",
+            videos: "Video Reference",
+            papers: "Previous Year Papers"
+          };
+      
+          Object.entries(links).forEach(([key, url]) => {
+            const title = linkTitles[key];
+            linkContainer.innerHTML += `
+              <a href="${url}" class="block p-4 rounded-lg bg-white shadow hover:bg-blue-100 transition" target="_blank">
+                ${title}
+              </a>`;
+          });
+        }
+      
+        // Password Logic
+        document.addEventListener("DOMContentLoaded", () => {
+          const passwordInput = document.getElementById("passwordInput");
+          const toggleBtn = document.getElementById("togglePassword");
+          const checkBtn = document.getElementById("checkBtn");
+          const superDiv = document.getElementById("superDiv");
+          const unlockedDiv = document.getElementById("unlockedDiv");
+      
+          toggleBtn.addEventListener("click", () => {
+            passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+            toggleBtn.textContent = passwordInput.type === "password" ? "Show Password" : "Hide Password";
+          });
+      
+          checkBtn.addEventListener("click", () => {
+            const userInput = passwordInput.value.trim();
+            let decoded1 = "", decoded2 = "";
+            try {
+              decoded1 = atob(wordOne);
+              decoded2 = atob(wordTwo);
+            } catch {
+              alert("Error decoding password.");
+              return;
+            }
+      
+            if (userInput === decoded1 + decoded2) {
+              superDiv.style.display = "none";
+              unlockedDiv.classList.remove("hidden");
+            } else {
+              alert("Incorrect password. Contact Admin.");
+            }
+          });
+        });
+      </script>
+      
+
+
+</body>
+</html>

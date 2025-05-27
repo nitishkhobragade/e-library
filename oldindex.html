@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontSize: {
+              'responsive': ['clamp(1rem, 2.5vw, 1.3rem)', '1.5rem'],
+              'responsive-xl': ['clamp(1.25rem, 3vw, 2rem)', '2rem'],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-blue-700 text-white py-4 shadow-md">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-responsive-xl font-bold">Study Hub</h1>
+      </div>
+    </header>
+
+    <!-- Branch and Semester Selection -->
+    <main class="container mx-auto px-4 py-6 space-y-6">
+      <!-- Branch Selection -->
+      <section>
+        <h2 class="text-responsive font-semibold text-blue-700 mb-2">Select Branch</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          <button onclick="selectBranch('CSE')" class="branch-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">CSE</button>
+          <button onclick="selectBranch('Civil')" class="branch-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Civil</button>
+          <button onclick="selectBranch('Electrical')" class="branch-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Electrical</button>
+          <button onclick="selectBranch('ECE')" class="branch-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">ECE</button>
+          <button onclick="selectBranch('Mechanical')" class="branch-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Mechanical</button>
+        </div>
+      </section>
+
+      <!-- Semester Selection -->
+      <section>
+        <h2 class="text-responsive font-semibold text-blue-700 mb-2">Select Semester</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button onclick="selectSemester(1)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 1</button>
+            <button onclick="selectSemester(2)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 2</button>
+            <button onclick="selectSemester(3)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 3</button>
+            <button onclick="selectSemester(4)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 4</button>
+            <button onclick="selectSemester(5)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 5</button>
+            <button onclick="selectSemester(6)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 6</button>
+            <button onclick="selectSemester(7)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 7</button>
+            <button onclick="selectSemester(8)" class="semester-btn bg-white border p-3 rounded-lg shadow hover:bg-blue-100 text-center">Semester 8</button>
+          </div>
+      </section>
+
+      <!-- Links Display -->
+      <section id="linksSection" class="hidden bg-white p-6 rounded-xl shadow space-y-4">
+        <h2 class="text-responsive font-bold text-blue-700" id="heading"></h2>
+        <ul id="resourceLinks" class="list-disc pl-6 space-y-2 text-blue-600"></ul>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-700 text-white text-center py-4">
+      &copy; 2025 Study Hub. All rights reserved.
+    </footer>
+
+    <script>
+      const resources = {
+        CSE: {
+          1: {
+            syllabus: "https://drive.google.com/cse/sem1/syllabus",
+            books: "https://drive.google.com/cse/sem1/books",
+            notes: "https://drive.google.com/cse/sem1/notes",
+            questions: "https://drive.google.com/cse/sem1/questions",
+            videos: "https://drive.google.com/cse/sem1/videos",
+            papers: "https://drive.google.com/cse/sem1/papers"
+          },
+          // Add Sem 2 to Sem 8 for CSE similarly...
+        },
+        Civil: {
+          1: {
+            syllabus: "https://drive.google.com/civil/sem1/syllabus",
+            books: "https://drive.google.com/civil/sem1/books",
+            notes: "https://drive.google.com/civil/sem1/notes",
+            questions: "https://drive.google.com/civil/sem1/questions",
+            videos: "https://drive.google.com/civil/sem1/videos",
+            papers: "https://drive.google.com/civil/sem1/papers"
+          }
+        },
+        Electrical: {
+          1: {
+            syllabus: "https://drive.google.com/electrical/sem1/syllabus",
+            books: "https://drive.google.com/electrical/sem1/books",
+            notes: "https://drive.google.com/electrical/sem1/notes",
+            questions: "https://drive.google.com/electrical/sem1/questions",
+            videos: "https://drive.google.com/electrical/sem1/videos",
+            papers: "https://drive.google.com/electrical/sem1/papers"
+          }
+        },
+        ECE: {
+          1: {
+            syllabus: "https://drive.google.com/ece/sem1/syllabus",
+            books: "https://drive.google.com/ece/sem1/books",
+            notes: "https://drive.google.com/ece/sem1/notes",
+            questions: "https://drive.google.com/ece/sem1/questions",
+            videos: "https://drive.google.com/ece/sem1/videos",
+            papers: "https://drive.google.com/ece/sem1/papers"
+          }
+        },
+        Mechanical: {
+          1: {
+            syllabus: "https://drive.google.com/me/sem1/syllabus",
+            books: "https://drive.google.com/me/sem1/books",
+            notes: "https://drive.google.com/me/sem1/notes",
+            questions: "https://drive.google.com/me/sem1/questions",
+            videos: "https://drive.google.com/me/sem1/videos",
+            papers: "https://drive.google.com/me/sem1/papers"
+          }
+        }
+      };
+
+      let selectedBranch = "";
+      let selectedSemester = 0;
+
+      function selectBranch(branch) {
+        selectedBranch = branch;
+        checkSelection();
+      }
+
+      function selectSemester(sem) {
+        selectedSemester = sem;
+        checkSelection();
+      }
+
+      function checkSelection() {
+        if (selectedBranch && selectedSemester) {
+          const data = resources[selectedBranch]?.[selectedSemester];
+          const section = document.getElementById("linksSection");
+          const list = document.getElementById("resourceLinks");
+          const heading = document.getElementById("heading");
+
+          if (data) {
+            section.classList.remove("hidden");
+            heading.textContent = `${selectedBranch} - Semester ${selectedSemester} Resources`;
+            list.innerHTML = `
+              <li><a href="${data.syllabus}" target="_blank" class="hover:underline">📘 Syllabus</a></li>
+              <li><a href="${data.books}" target="_blank" class="hover:underline">📗 Study Books</a></li>
+              <li><a href="${data.notes}" target="_blank" class="hover:underline">📒 Handwritten Notes</a></li>
+              <li><a href="${data.questions}" target="_blank" class="hover:underline">📝 Important Questions</a></li>
+              <li><a href="${data.videos}" target="_blank" class="hover:underline">🎥 Video Reference</a></li>
+              <li><a href="${data.papers}" target="_blank" class="hover:underline">📄 Previous Year Papers</a></li>
+            `;
+          } else {
+            section.classList.add("hidden");
+          }
+        }
+      }
+    </script>
+
+  </body>
+</html>
