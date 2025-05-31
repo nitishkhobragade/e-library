@@ -7,6 +7,21 @@
   <link rel="icon" type="image/x-icon" href="../logo-n.png">
   <link rel="icon" type="image/x-icon" href="https://nitishkhobragade.github.io/portfolio.nitish//img/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .floating-img {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
+  
 </head>
 <body class="bg-gray-100 text-gray-800">
 
@@ -20,19 +35,94 @@
 
       <!-- Superdiv (Locked Section) -->
         <!-- Locked Div -->
+<div id="superDiv"
+     class="relative flex flex-col items-center justify-center h-[60vh] bg-white p-8 text-center shadow-md bg-cover bg-center overflow-hidden"
+     style="background-image: url('/img/engineers\ day.jpg'); backdrop-filter: blur(0px); background-size: cover;">
+<!-- Informative Heading -->
+<div class="relative z-20 mb-4 text-center max-w-4xl">
+  <h1 class="text-lg md:text-xl lg:text-2xl font-bold text-white drop-shadow-sm leading-snug">
+    🎓 This Website is Created for Helping Engineering Students
+  </h1>
+  <p class="mt-1 text-xs md:text-sm lg:text-base text-white/90">
+    Based on the <span class="font-semibold text-yellow-200">RGPV Syllabus</span>, it includes 
+    Syllabus, Important Questions, Notes, Previous Year Papers for 
+    <span class="text-yellow-100">B.Tech</span>, <span class="text-yellow-100">Polytechnic</span>, 
+    <span class="text-yellow-100">M.Tech</span>, and <span class="text-yellow-100">MBA</span>.
+  </p>
+</div>
+  
+  <!-- Background Overlay for Fade/Blur -->
+  <div class="absolute inset-0 bg-white/40 backdrop-blur-sm z-0 pointer-events-none"></div>
 
-    <div id="superDiv" class="flex flex-col items-center justify-center h-[60vh] bg-white p-8 text-center shadow-md">
+  <!-- Floating Images (with no interaction) -->
+  <img src="/img/RGPVLOGO.png" class="floating-img pointer-events-none select-none absolute w-20 h-20 z-10" />
+  <img src="/img/cons.png" class="floating-img pointer-events-none select-none absolute w-20 h-20 z-10" />
+  <img src="/img/cabinet.png" class="floating-img pointer-events-none select-none absolute w-20 h-20 z-10" />
+  <img src="/img/penbook.png" class="floating-img pointer-events-none select-none absolute w-20 h-20 z-10" />
+
+  <!-- Locked Content (Above Background) -->
+  <div class="relative z-20">
+    <h2 class="text-xl font-bold text-gray-700 mb-4">🔐 Locked Area</h2>
+    <p class="mb-4 text-sm text-yellow-200">Enter the password to access course content (पाठ्यक्रम सामग्री तक पहुंचने के लिए पासवर्ड दर्ज करें)</p>
+    <p class="mb-4 text-sm text-yellow-200">Contact Your Teacher or Admin for Password (पासवर्ड के लिए अपने शिक्षक या Admin से संपर्क करें)</p>
+    <input type="password" id="passwordInput" placeholder="Enter password"
+           class="border border-gray-300 p-2 rounded mb-2 w-64 text-center"/> <br>
+    <button id="togglePassword" class="text-sm text-yellow-300 mb-4 hover:underline">Show Password</button><br>
+    <button id="checkBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Unlock Content</button>
+  </div>
+</div>
+
+<!-- Floating Animation Script -->
+<script>
+  const floatingImgs = document.querySelectorAll('.floating-img');
+  const superDiv = document.getElementById('superDiv');
+
+  function getRandomPosition() {
+    const bounds = superDiv.getBoundingClientRect();
+    const maxX = bounds.width - 48; // 48 = image size
+    const maxY = bounds.height - 48;
+
+    return {
+      top: Math.random() * maxY,
+      left: Math.random() * maxX
+    };
+  }
+
+  function animateImage(img) {
+    const { top, left } = getRandomPosition();
+    img.style.transition = 'transform 3s ease-in-out, top 3s ease-in-out, left 3s ease-in-out';
+    img.style.top = `${top}px`;
+    img.style.left = `${left}px`;
+  }
+
+  function startAnimation() {
+    floatingImgs.forEach(img => {
+      setInterval(() => animateImage(img), 3000 + Math.random() * 2000);
+    });
+  }
+
+  // Initial random positions
+  floatingImgs.forEach(img => {
+    const { top, left } = getRandomPosition();
+    img.style.top = `${top}px`;
+    img.style.left = `${left}px`;
+  });
+
+  startAnimation();
+</script>
+
+    <!-- <div id="superDiv" class="flex flex-col items-center justify-center h-[60vh] bg-white p-8 text-center shadow-md">
         <h2 class="text-xl font-bold text-gray-700 mb-4">🔐 Locked Area</h2>
-        <p class="mb-4 text-sm text-gray-600">Enter the password to access course content</p>
-        <p class="mb-4 text-sm text-red-600">Contact Your Teacher or Admin for PassWord</p>
+        <p class="mb-4 text-sm text-gray-600">Enter the password to access course content (पाठ्यक्रम सामग्री तक पहुंचने के लिए पासवर्ड दर्ज करें)</p>
+        <p class="mb-4 text-sm text-red-600">Contact Your Teacher or Admin for Password (पासवर्ड के लिए अपने शिक्षक या Admin से संपर्क करें)</p>
         <input type="password" id="passwordInput" placeholder="Enter password" 
             class="border border-gray-300 p-2 rounded mb-2 w-64 text-center"/>
         <button id="togglePassword" class="text-sm text-blue-600 mb-4 hover:underline">Show Password</button>
         <button id="checkBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
         Unlock Content
         </button>
-    </div>
-
+    </div> -->
+        <!-- Locked Div -->
     <!-- UnlockedDiv (Course Content Section) -->
     <div id="unlockedDiv" class="hidden p-6 bg-gray-50">
         <!-- background image div  -->
@@ -63,6 +153,54 @@
 
         </div>
     </div>
+
+  <!-- filter module ends here  -->
+
+  <!-- popup module here  -->
+<div id="popupModule2">
+  <!-- Floating Filter Button -->
+  <button id="filterBtn2" class="fixed bottom-5 right-5 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg z-50 unlockPopup hidden">
+    📂 Resources
+  </button>
+
+  <!-- Popup Filter Modal -->
+  <div id="popupModalV22" class="hidden fixed bottom-20 right-5 bg-white shadow-xl rounded-xl p-4 w-80 z-50">
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="text-lg font-semibold">Google Drive Filter</h2>
+      <button id="closeModal2" class="text-red-500 text-lg">✕</button>
+    </div>
+    
+    <select id="courseSelect2" class="w-full p-2 mb-2 border rounded">
+      <option value="">Select Course</option>
+    </select>
+
+    <select id="semesterSelect2" class="w-full p-2 mb-2 border rounded">
+      <option value="">Select Semester</option>
+    </select>
+
+    <select id="branchSelect2" class="w-full p-2 mb-2 border rounded">
+      <option value="">Select Branch</option>
+    </select>
+
+    <select id="resourceSelect2" class="w-full p-2 mb-2 border rounded">
+      <option value="">Select Resource</option>
+      <option value="syllabus">Syllabus</option>
+      <option value="books">Books</option>
+      <option value="notes">Notes</option>
+      <option value="questions">Questions</option>
+      <option value="videos">Videos</option>
+      <option value="papers">Papers</option>
+    </select>
+
+    <button id="showDriveBtn2" class="w-full bg-blue-500 text-white py-2 rounded">Show Folder</button>
+  </div>
+
+  <!-- Iframe for Preview -->
+  <div class="w-full h-[600px] p-4" id="iframeBox">
+    <iframe id="driveIframeV22" class="w-full h-full border rounded" src="" allowfullscreen></iframe>
+  </div>
+</div>
+<!-- popup module ends here -->
 
     
 
@@ -167,12 +305,12 @@
           linkContainer.innerHTML = "";
           if (!links) return;
           const linkTitles = {
-            syllabus: "Syllabus",
-            books: "Study Books",
-            notes: "Handwritten Notes",
-            questions: "Important Questions",
-            videos: "Video Reference",
-            papers: "Previous Year Papers"
+            syllabus: "📘 Syllabus",
+            books: "📚 Study Books",
+            notes: "📝 Notes",
+            questions: "❓ Questions",
+            videos: "🎥 Videos",
+            papers: "📄 Previous Year Papers"
           };
       
           Object.entries(links).forEach(([key, url]) => {
@@ -191,6 +329,7 @@
           const checkBtn = document.getElementById("checkBtn");
           const superDiv = document.getElementById("superDiv");
           const unlockedDiv = document.getElementById("unlockedDiv");
+          const unlockPopup = document.getElementsByClassName("unlockPopup");
       
           toggleBtn.addEventListener("click", () => {
             passwordInput.type = passwordInput.type === "password" ? "text" : "password";
@@ -210,12 +349,173 @@
       
             if (userInput === decoded1 + decoded2) {
               superDiv.style.display = "none";
+              // unlockPopup.classList.remove("hidden");
               unlockedDiv.classList.remove("hidden");
+
             } else {
               alert("Incorrect password. Contact Admin.");
             }
           });
         });
+
+// ====================#######################======================================= ====================
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const filterBtn = document.getElementById("filterBtn2");
+  const popupModal = document.getElementById("popupModalV22");
+  const closeModal = document.getElementById("closeModal2");
+  const showDriveBtn = document.getElementById("showDriveBtn2");
+  const driveIframe = document.getElementById("driveIframeV22");
+  const iframeBox = document.getElementById("iframeBox");
+
+  const courseSelect = document.getElementById("courseSelect2");
+  const branchSelect = document.getElementById("branchSelect2");
+  const semesterSelect = document.getElementById("semesterSelect2");
+  const resourceSelect = document.getElementById("resourceSelect2");
+
+  // Initially hide iframe container's parent (or iframe itself)
+  driveIframe.style.display = "none";
+  iframeBox.style.display = "none";
+
+  if (
+    !filterBtn ||
+    !popupModal ||
+    !closeModal ||
+    !showDriveBtn ||
+    !driveIframe ||
+    !courseSelect ||
+    !branchSelect ||
+    !semesterSelect ||
+    !resourceSelect
+  ) {
+    console.warn("Popup module elements missing; skipping popup initialization.");
+    return;
+  }
+
+  // Toggle modal
+  filterBtn.addEventListener("click", () => {
+    popupModal.classList.toggle("hidden");
+  });
+
+  closeModal.addEventListener("click", () => {
+    popupModal.classList.add("hidden");
+  });
+
+  function populateDropdown(selectElement, options) {
+    selectElement.innerHTML = `<option value="">Select</option>`;
+    options.forEach((opt) => {
+      const optionEl = document.createElement("option");
+      optionEl.value = opt;
+      optionEl.textContent = opt;
+      selectElement.appendChild(optionEl);
+    });
+  }
+
+  if (typeof courseData === "undefined") {
+    console.warn("courseData is undefined. Dropdowns will not populate.");
+    return;
+  }
+
+  // Populate course dropdown
+  populateDropdown(courseSelect, Object.keys(courseData));
+
+  // On course change: populate semester dropdown with numbers 1 to total semesters
+  courseSelect.addEventListener("change", () => {
+    const selectedCourse = courseSelect.value;
+    if (!selectedCourse || !courseData[selectedCourse]) {
+      semesterSelect.innerHTML = `<option value="">Select Semester</option>`;
+      branchSelect.innerHTML = `<option value="">Select Branch</option>`;
+      branchSelect.disabled = true;
+      return;
+    }
+
+    const totalSemesters = courseData[selectedCourse].semesters || 8;
+    const semesters = Array.from({ length: totalSemesters }, (_, i) => String(i + 1));
+    populateDropdown(semesterSelect, semesters);
+
+    branchSelect.innerHTML = `<option value="">Select Branch</option>`;
+    branchSelect.disabled = true;
+  });
+
+  // On semester change: if semester is common, disable branch select, else populate branches
+  semesterSelect.addEventListener("change", () => {
+    const selectedCourse = courseSelect.value;
+    const selectedSemester = semesterSelect.value;
+    if (!selectedCourse || !selectedSemester) {
+      branchSelect.innerHTML = `<option value="">Select Branch</option>`;
+      branchSelect.disabled = true;
+      return;
+    }
+
+    const commonSemesters = courseData[selectedCourse].common || [];
+    if (commonSemesters.includes(Number(selectedSemester))) {
+      // Common semester — no branch selection needed
+      branchSelect.innerHTML = `<option value="">N/A for Common Semester</option>`;
+      branchSelect.disabled = true;
+    } else {
+      // Branch specific semester
+      const branches = courseData[selectedCourse].branches || [];
+      populateDropdown(branchSelect, branches);
+      branchSelect.disabled = false;
+    }
+  });
+
+  // Populate resource dropdown on load (static list based on your keys)
+  const resources = ["syllabus", "books", "notes", "questions", "videos", "papers"];
+  populateDropdown(resourceSelect, resources);
+
+  showDriveBtn.addEventListener("click", () => {
+    const course = courseSelect.value;
+    const semester = semesterSelect.value;
+    const resource = resourceSelect.value;
+
+     driveIframe.style.display = "block";
+     iframeBox.style.display = "block";
+
+    if (!course || !semester || !resource) {
+      alert("Please select Course, Semester, and Resource.");
+      return;
+    }
+
+    const commonSemesters = courseData[course].common || [];
+    let link = "";
+
+    if (commonSemesters.includes(Number(semester))) {
+      // For common semesters, data is under data[semester].common
+      link = courseData[course].data?.[semester]?.common?.[resource] || "";
+    } else {
+      // For branch-specific semesters, branch is required
+      const branch = branchSelect.value;
+      if (!branch) {
+        alert("Please select Branch.");
+        return;
+      }
+      link = courseData[course].data?.[semester]?.[branch]?.[resource] || "";
+    }
+
+    if (link) {
+      driveIframe.src = link;
+      popupModal.classList.remove("hidden"); // Show modal with iframe
+    } else {
+      alert("Link not available for this combination.");
+      driveIframe.src = "";
+    }
+  });
+
+    // Close dropdown if click outside popup modal or filter button
+  document.addEventListener("click", (event) => {
+    const isClickInsidePopup = popupModal.contains(event.target);
+    const isClickOnFilterBtn = filterBtn.contains(event.target);
+
+    if (!isClickInsidePopup && !isClickOnFilterBtn) {
+      popupModal.classList.add("hidden");
+    }
+  });
+});
+
+//         // popupModal code
+
       </script>
       
 
